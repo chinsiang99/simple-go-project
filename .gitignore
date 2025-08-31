@@ -1,0 +1,55 @@
+# =========================
+# Go build / cache
+# =========================
+bin/
+build/
+dist/
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go modules cache
+vendor/
+*.sum
+
+# Go coverage files
+*.cover
+*.coverprofile
+coverage.out
+
+# =========================
+# Environment & Config
+# =========================
+.env
+.env.local
+.env.*.local
+.env.postgres
+
+# keep example files
+!.env.example
+
+# =========================
+# Logs
+# =========================
+*.log
+log/
+logs/
+
+# =========================
+# IDE / Editor junk
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# =========================
+# Docker
+# =========================
+docker-compose.override.yml
