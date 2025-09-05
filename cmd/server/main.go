@@ -1,17 +1,6 @@
 package main
 
-import (
-	// _ "github.com/simple-go-project/docs" // Import swagger docs
-
-	"net/http"
-
-	"github.com/chinsiang99/simple-go-project/internal/api/middlewares"
-	"github.com/chinsiang99/simple-go-project/internal/config"
-
-	// "github.com/chinsiang99/simple-go-project/internal/database"
-	"github.com/chinsiang99/simple-go-project/internal/utils/logger"
-	"github.com/gin-gonic/gin"
-)
+// _ "github.com/simple-go-project/docs" // Import swagger docs
 
 // @title github.com/simple-go-project API
 // @version 1.0
@@ -23,22 +12,24 @@ import (
 // @name Authorization
 // @description Type "Bearer" followed by a space and JWT token.
 func main() {
-	// Load configuration
-	cfg := config.New()
+	// // Load configuration
+	// cfg := config.New()
 
-	// Initialize logger with file rotation
-	logger.Init(cfg.LOG)
+	// // Initialize logger with file rotation
+	// logger.Init(cfg.LOG)
 
-	// Initialize database
+	// // Initialize database
 	// db, err := database.Init(cfg.DB)
 	// if err != nil {
 	// 	logger.Fatal("Failed to initialize database:", err)
 	// }
 
+	bootstrap()
+
 	// Set Gin mode if it is production
-	if cfg.APP.Environment == "production" {
-		gin.SetMode(gin.ReleaseMode)
-	}
+	// if cfg.APP.Environment == "production" {
+	// 	gin.SetMode(gin.ReleaseMode)
+	// }
 
 	// Initialize router
 	// router := routes.SetupRoutes(db, cfg)
@@ -48,25 +39,25 @@ func main() {
 	// 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	// }
 
-	gin.SetMode(gin.ReleaseMode)
+	// gin.SetMode(gin.ReleaseMode)
 
-	router := gin.New()
+	// router := gin.New()
 
-	router.Use(gin.Recovery())
-	router.Use(middlewares.Log())
+	// router.Use(gin.Recovery())
+	// router.Use(middlewares.Log())
 
-	router.GET("/hello", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "Hello, Gin!",
-		})
-	})
+	// router.GET("/hello", func(c *gin.Context) {
+	// 	c.JSON(http.StatusOK, gin.H{
+	// 		"message": "Hello, Gin!",
+	// 	})
+	// })
 
 	// Start server
-	logger.Infof("Starting server on port %v", cfg.APP.AppPort)
+	// logger.Infof("Starting server on port %v", cfg.APP.AppPort)
 	// if err := router.Run(":" + cfg.APP.AppPort); err != nil {
 	// 	logger.Fatal("Failed to start server:", err)
 	// }
-	if err := router.Run(":8080"); err != nil {
-		logger.Fatal("Failed to start server:", err)
-	}
+	// if err := router.Run(":8080"); err != nil {
+	// 	logger.Fatal("Failed to start server:", err)
+	// }
 }

@@ -14,7 +14,7 @@ import (
 var log *logrus.Logger
 
 // Init initializes a single structured logger
-func Init(cfg config.LogConfig) {
+func Init(cfg *config.LogConfig) {
 	// Ensure log directories exist
 	dirs := []string{
 		filepath.Dir(cfg.AppPath),

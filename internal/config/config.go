@@ -9,9 +9,9 @@ import (
 )
 
 type Config struct {
-	DB  DBConfig
-	APP AppConfig
-	LOG LogConfig
+	DB  *DBConfig
+	APP *AppConfig
+	LOG *LogConfig
 }
 
 type DBConfig struct {
@@ -27,7 +27,7 @@ type DBConfig struct {
 
 type AppConfig struct {
 	Environment string
-	AppPort     int
+	AppPort     string
 }
 
 type LogConfig struct {
@@ -57,7 +57,7 @@ func init() {
 		}
 	}
 
-	cfg.DB = DBConfig{
+	cfg.DB = &DBConfig{
 		Host:       confighelper.GetEnv("DB_HOST", ""),
 		Name:       confighelper.GetEnv("DB_NAME", ""),
 		User:       confighelper.GetEnv("DB_USER", ""),
@@ -68,15 +68,16 @@ func init() {
 		MaxIdleCon: confighelper.GetEnvAsInt("DB_MAX_IDLE_CON", 2),
 	}
 
-	cfg.APP = AppConfig{
+	cfg.APP = &AppConfig{
 		Environment: confighelper.GetEnv("ENVIRONMENT", "development"),
-		AppPort:     confighelper.GetEnvAsInt("APP_PORT", 9090),
+		AppPort:     confighelper.GetEnv("APP_PORT", "9090"),
 	}
 
-	cfg.LOG = LogConfig{
+	cfg.LOG = &LogConfig{
 		Level:      confighelper.GetEnv("LOG_LEVEL", ""),
 		LogToFile:  confighelper.GetEnvAsBool("LOG_TO_FILE", true),
 		AppPath:    confighelper.GetEnv("LOG_APP_PATH", ""),
+		ErrPath:    confighelper.GetEnv("LOG_ERR_PATH", ""),
 		MaxSize:    confighelper.GetEnvAsInt("LOG_FILE_SIZE", 12),
 		MaxBackups: confighelper.GetEnvAsInt("LOG_BACKUPS", 2),
 		MaxAge:     confighelper.GetEnvAsInt("LOG_AGE", 7),
