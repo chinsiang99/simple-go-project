@@ -30,7 +30,7 @@ func bootstrap() {
 	repos := repositories.NewRepositoryManager(dbConn)
 	services := services.NewServiceManager(repos)
 	handlers := handlers.NewHandlerManager(services)
-	router := routers.NewRouterManager(handlers, cfg.APP)
+	router := routers.NewRouterManager(handlers, cfg.APP, cfg.SECURITY)
 
 	addr := fmt.Sprintf(":%v", cfg.APP.AppPort)
 	logger.Infof("Starting server on port %v", addr)

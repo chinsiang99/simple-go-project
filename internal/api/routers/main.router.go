@@ -7,7 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func NewRouterManager(handlers *handlers.HandlerManager, appConfig *config.AppConfig) *gin.Engine {
+func NewRouterManager(handlers *handlers.HandlerManager, appConfig *config.AppConfig, securityConfig *config.SecurityConfig) *gin.Engine {
 	// Set Gin mode if it is production
 	if appConfig.Environment == "production" {
 		gin.SetMode(gin.ReleaseMode)
@@ -24,6 +24,7 @@ func NewRouterManager(handlers *handlers.HandlerManager, appConfig *config.AppCo
 
 	router.Use(gin.Recovery())
 	router.Use(middlewares.Log())
+	router.Use(middlewares.SecurityMiddleware(appConfig, securityConfig))
 
 	RegisterAuthRoutes(router, handlers.AuthHandler)
 	RegisterAppRoutes(router)

@@ -9,9 +9,10 @@ import (
 )
 
 type Config struct {
-	DB  *DBConfig
-	APP *AppConfig
-	LOG *LogConfig
+	DB       *DBConfig
+	APP      *AppConfig
+	LOG      *LogConfig
+	SECURITY *SecurityConfig
 }
 
 type DBConfig struct {
@@ -39,6 +40,15 @@ type LogConfig struct {
 	MaxBackups int // number of backups
 	MaxAge     int //days
 	Compress   bool
+}
+
+type SecurityConfig struct {
+	CorsAllowOrigins     string
+	CorsAllowMethods     string
+	CorsAllowHeaders     string
+	CorsExposeHeaders    string
+	CorsAllowCredentials bool
+	CorsMaxAge           string
 }
 
 var cfg Config
@@ -82,6 +92,15 @@ func init() {
 		MaxBackups: confighelper.GetEnvAsInt("LOG_BACKUPS", 2),
 		MaxAge:     confighelper.GetEnvAsInt("LOG_AGE", 7),
 		Compress:   confighelper.GetEnvAsBool("LOG_COMPRESS", true),
+	}
+
+	cfg.SECURITY = &SecurityConfig{
+		CorsAllowOrigins:     confighelper.GetEnv("CORS_ALLOW_ORIGINS", "*"),
+		CorsAllowMethods:     confighelper.GetEnv("CORS_ALLOW_METHODS", "*"),
+		CorsAllowHeaders:     confighelper.GetEnv("CORS_ALLOW_HEADERS", "*"),
+		CorsExposeHeaders:    confighelper.GetEnv("CORS_EXPOSE_HEADERS", "*"),
+		CorsAllowCredentials: confighelper.GetEnvAsBool("CORS_ALLOW_CREDENTIALS", false),
+		CorsMaxAge:           confighelper.GetEnv("CORS_MAX_AGE", "*"),
 	}
 }
 

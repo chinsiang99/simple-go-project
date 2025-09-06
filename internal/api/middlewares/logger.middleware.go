@@ -11,6 +11,12 @@ func Log() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		start := time.Now()
 
+		// Skip noisy OPTIONS requests
+		if c.Request.Method == "OPTIONS" {
+			c.Next()
+			return
+		}
+
 		// Process request
 		c.Next()
 
