@@ -8,6 +8,7 @@ import (
 	// "trouble-ticket-ms/src/models"
 
 	"github.com/chinsiang99/simple-go-project/internal/config"
+	"github.com/chinsiang99/simple-go-project/internal/models"
 	"github.com/chinsiang99/simple-go-project/internal/utils/logger"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -109,6 +110,13 @@ func Init(config *config.DBConfig) (*DB, error) {
 // 	// }
 // 	// return true
 // }
+
+func (db *DB) Migrate() error {
+	return db.AutoMigrate(
+		&models.User{},
+		// &models.Ticket{},  // add more models here
+	)
+}
 
 /*
 	func CloseDB(db *DB) {

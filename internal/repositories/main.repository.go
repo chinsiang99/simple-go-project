@@ -6,14 +6,14 @@ import "github.com/chinsiang99/simple-go-project/internal/database"
 
 type RepositoryManager struct {
 	AuthRepository *AuthRepository
-	// UserRepository   *UserRepository
+	UserRepository IUserRepository
 	// TicketRepository *TicketRepository
 }
 
 func NewRepositoryManager(db *database.DB) *RepositoryManager {
 	return &RepositoryManager{
 		AuthRepository: NewAuthRepository(db),
-		// UserRepository:   NewUserRepository(db),
+		UserRepository: NewUserRepository(db.DB),
 		// TicketRepository: NewTicketRepository(db),
 	}
 }

@@ -24,6 +24,10 @@ func bootstrap() {
 		logger.Fatal("Failed to initialize database:", err)
 	}
 
+	if err := dbConn.Migrate(); err != nil {
+		logger.Fatalf("failed to run migrations: %v", err)
+	}
+
 	// Initialize the context
 	// ctx := context.Background()
 

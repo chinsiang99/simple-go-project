@@ -28,7 +28,7 @@ func NewRouterManager(handlers *handlers.HandlerManager, appConfig *config.AppCo
 
 	RegisterAuthRoutes(router, handlers.AuthHandler)
 	RegisterAppRoutes(router)
-	// RegisterUserRoutes(router, h.UserHandler)
+	RegisterUserRoutes(router, handlers.UserHandler)
 	// RegisterTicketRoutes(router, h.TicketHandler)
 
 	return router
