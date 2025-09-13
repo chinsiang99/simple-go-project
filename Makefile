@@ -24,7 +24,7 @@ test-coverage:
 
 # Generate swagger documentation
 swagger:
-	swag init -g cmd/server/main.go -o docs/
+	swag init -g cmd/server/main.go -o internal/docs
 
 # Run database migrations
 migrate:
