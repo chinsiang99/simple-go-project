@@ -6,7 +6,7 @@ import (
 )
 
 func RegisterUserRoutes(router *gin.Engine, handler handlers.IUserHandler) {
-	users := router.Group("/users")
+	users := router.Group("/api/v1/users")
 	{
 		users.POST("", handler.CreateUser)
 		users.GET("", handler.GetAllUsers)
