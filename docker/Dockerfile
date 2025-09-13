@@ -18,6 +18,12 @@ WORKDIR /app
 
 COPY --from=builder /app/main .
 
+# # Copy Swagger docs
+# COPY internal/docs /app/docs
+
+# Copy the Swagger docs from the builder
+COPY --from=builder /app/internal/docs /app/internal/docs
+
 # Let logs go to stdout/stderr instead of container fs
 EXPOSE 8080
 
